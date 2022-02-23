@@ -615,8 +615,6 @@ dict["Sat"] = 2
 dict["Sun"] = 9
 print(dict)
 
-
-
 #When we see a new name
 counts = dict()
 names = ['csev', 'cwen', 'csev', 'zqian', 'cwen']
@@ -626,4 +624,242 @@ for name in names :
     else :
         counts[name] = counts[name] + 1
 print(counts)
+
+#Counting pattern
+counts = dict()
+print('Enter a line of text:')
+line = input('')
+words = line.split()
+print('Word', words)
+print('Counting ...')
+for word in words :
+    counts[word] = counts.get(word,0) + 1
+print('Count', counts)
+
+counts = ('chuck' : 1, 'fred': 42, 'jan' : 100)
+for key in counts :
+    print(key, counts[key])
+
+#Retrieving list of Keys and Values
+jjj = {'chuck' : 1, 'fred': 42, 'jan' : 100}
+print(list(jjj))
+print(jjj.keys())
+print(jjj.values())
+print(jjj.items())
+
+#two iteration variables
+jjj = {'chuck' : 1, 'fred': 42, 'jan' : 100}
+for aaa, bbb in jjj.items() :
+    print(aaa, bbb)
+
+name = input('Enter file:')
+handle = open(name, 'r')
+
+count = dict()
+for line in handle:
+    words = line.split()
+    for word in words:
+        counts[word] = counts.get(word,0) + 1
+
+bigcount = None
+bigword = None
+for word, count in counts.items():
+    if bigcount is None or count > bigcount:
+        bigword = word
+        bigcount = count
+
+counts = { 'chuck' : 1 , 'annie' : 42, 'jan': 100}
+for key in counts:
+    if counts[key] > 10:
+        print(key, counts[key])
+
+#Tuples are another kind of sequence that functions much like a list
+    #They have element which are indexed starting at 0
+x = ('Glenn', 'Sally', 'Joseph')
+print(x[2])
+
+y = (1, 9, 2)
+print(y)
+print(max(y))
+
+for iter in y:
+    print(iter)
+
+#Tuples are "immutable"
+    #can't alter it's content
+x = [9, 8, 7]
+x[2] = 6
+print(x)
+
+y = 'ABC'
+y[2] = 'D'
+
+z = (5, 4, 3)
+z[2] = 0
+
+x = (3, 2, 1)
+x.sort()
+x.append(5)
+x.reverse()
+
+#Different list and tuple
+l = list()
+dir(l)
+t = tuple()
+dir(t)
+
+#Tuples and assignment
+(x, y) = (4, 'fred')
+print(y)
+(a, b) = (99, 98)
+print(a)
+
+#tuples and dictionaries
+d = dict()
+d['csev'] = 2
+d['cwen'] = 4
+for (k, v) in d.items():
+    print(k,v)
+
+tups = d.items()
+print(tups)
+
+d = dict()
+d['quincy'] = 1
+d['beau'] = 5
+d['kris'] = 9
+for (k,i) in d.items():
+    print(k, i)
+
+#tuples are comparable
+(0, 1, 2) < (5, 1, 2)
+(0, 1, 2000000) < (0, 3, 4)
+('Jones', 'Sally') < ('Jones', 'Sam')
+('Jones', 'Sally') > ('Adams', 'Sam')
+
+#sorting list of tuples
+d = {'a':10, 'b':1, 'c':22}
+d.items()
+sorted(d.items())
+
+d = {'a':10, 'b':1, 'c':22}
+t = sorted(d.items())
+t
+for k, v in sorted(d.items()):
+    print(k, v)
+
+#sort by values instead of key
+c = {'a':10, 'b':1, 'c':22}
+tmp = list()
+for k, v in c.items():
+    tmp.append((v,k))       #flipped key and value
+print(tmp)
+tmp = sorted(tmp, reverse=True)
+print(tmp)
+
+fhand = open('romeo.txt')       #open files
+counts = dict()
+for line in fhand:
+    words = line.split()
+    for word in words:
+        counts[word] = counts.get(word, 0) + 1
+lst = list()
+for key, val in counts.items():
+    newtup = (val, key)
+    lst.append(newtup)
+lst = sorted(lst, reverse=True)
+for val, key in lst[:10]:
+    print(key, val)
+
+#sorter version
+c = {'a':10, 'b':1, 'c':22}
+print(sorted([(v,k) for k,v in c.items()]))
+
+#using re.search() like find()
+
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    if line.find('From:') >= 0:
+        print(line)
+
+import re           #before use regular expresion must import library
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    if re.search('From:') >= 0:
+        print(line)
+
+#using re.search() like find(), startwith()
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    if line.startwith('From:') :
+        print(line)
+
+import re           #before use regular expresion must import library
+hand = open('mbox-short.txt')
+for line in hand:
+    line = line.rstrip()
+    if re.search('^From:', line) :
+        print(line)
+
+#wild-card character
+^X.*:       # '^' start with X, '.' match any character, '*' many times
+^X-\S+:     # '\S' match any non-whitespace character
+            # '\s' match only a white space character
+
+#matching and extracting data
+import re
+x = 'My 2 favorite numbers are 19 and 42'
+y = re.findall('[0-9+', x)      #[0-9] find between this digit
+print(y)                        #[0-9]+ find one or more digits
+y = re.findall('AEIOU+', x)     #find uppercase AEIOU, none match because no uppercase
+print(y)
+
+#Greedy matching
+import re
+x = 'From: Using the' : character
+y = re.findall('^F.+:', x)      #this code looking the longest string
+print(y)                        #the repeat character (* and +) push outward in both directions(greedy) to match the largest posible sting
+
+#Non-greedy matching
+import re
+x = 'From: Using the' : character
+y = re.findall('^F.+?:', x)      # '.+?' one or more character but not greedy
+print(y)  
+
+#fine tuning string extraction
+import re
+x = 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'
+y = re.findall('\S+@\S+', x)    #at least one non-white space character
+print(y)
+y = re.findall('^From (\S+@\S+)', x)    #parenthese are not part of the match - but they tell where to start and stop what string to extact
+print(y)
+
+import re
+s = 'A message from csev@umich.edu to cwen@iupui.edu about meeting @2PM'
+lst = re.findall('\\S+@\\S+', s)
+print(lst)
+
+#double split pattern
+line = 'From stephen.marquard@uct.ac.za Sat Jan 5 09:14:16 2008'
+words = line.split()
+email = words[1]
+pieces = email.split('@')
+print(pieces[1])
+
+#REGEX version
+import re
+lin = 'A message from csev@umich.edu to cwen@iupui.edu about meeting @2PM'
+y = re.findall('@([^ ]*)', lin)   #look through the string unting you find an '@' sign
+print(y)
+y = re.findall('^From .*@([^ ]*)', lin)
+
+#escape character
+#if you want a special regular expression character to just behave normallu, you prefix it with '\'
+import re
+x = 'We just received $10.00' for cookies.
+y = re.findall('\$[0-9.]+', x)
+print(y)
 
