@@ -6,6 +6,8 @@ from operator import length_hint
 from select import select
 from termios import N_TTY
 
+from attr import Attribute
+
 
 x = 1
 print(x)
@@ -853,6 +855,25 @@ pieces = email.split('@')
 print(pieces[1])
 
 #REGEX version
+#Python Regular Expression Quick Guide
+
+# ^        Matches the beginning of a line
+# $        Matches the end of the line
+# .        Matches any character
+# \s       Matches whitespace
+# \S       Matches any non-whitespace character
+# *        Repeats a character zero or more times
+# *?       Repeats a character zero or more times 
+#          (non-greedy)
+# +        Repeats a character one or more times
+# +?       Repeats a character one or more times 
+#          (non-greedy)
+# [aeiou]  Matches a single character in the listed set
+# [^XYZ]   Matches a single character not in the listed set
+# [a-z0-9] The set of characters can include a range
+# (        Indicates where string extraction is to start
+# )        Indicates where string extraction is to end
+
 import re
 lin = 'A message from csev@umich.edu to cwen@iupui.edu about meeting @2PM'
 y = re.findall('@([^ ]*)', lin)   #look through the string unting you find an '@' sign
@@ -860,7 +881,7 @@ print(y)
 y = re.findall('^From .*@([^ ]*)', lin)
 
 #escape character
-#if you want a special regular expression character to just behave normallu, you prefix it with '\'
+#if you want a special regular expression character to just behave normally, you prefix it with '\'
 import re
 x = 'We just received $10.00' for cookies.
 y = re.findall('\$[0-9.]+', x)
@@ -1208,3 +1229,184 @@ m = PartyAnimal('Miya')
 q.party()
 m.party()
 q.party()
+
+#inheritance
+class PartyAnimal:
+    x = 0
+    name = ''
+    def __init__(self, nam):
+        self.name = nam
+        print(self.name,'constructed')
+    def party(self):
+        self.x = self.x + 1
+        print(self.name,'party count',self.x)
+
+class FootballFan(PartyAnimal):
+    points = 0
+    def touchdown(self):
+        self.points = self.points + 7
+        self.party()
+        print(self.name, "points", self.points)
+s = PartyAnimal("Sally")
+s.party()
+j = FootballFan("Jim")
+j.party()
+j.touchdown()
+
+#definitions
+#Class - a template
+#Attribute - a variable within a class
+#Method - a function within a class
+#Object - a particular instance of a class
+#Constructor - code that runs when an object is created
+#Inheritance - the ability to extend a class to make a new class
+
+#make database (SQL)
+  
+#Single Table SQL
+CREATE TABLE "Users" ("name" TEXT, "email" TEXT)
+
+INSERT INTO Users (name, email) VALUES ('Chuck', 'csev@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Colleen', 'cvl@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Ted', 'ted@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Sally', 'a1@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Ted', 'ted@umich.edu')
+INSERT INTO Users (name, email) VALUES ('Kristen', 'kf@umich.edu')
+
+#SQL Delete
+DELETE FROM Users WHERE email='ted@umich.edu'
+
+#SQL update
+UPDATE Users SET name="Charles" WHERE email='csev@umich.edu'
+
+#Retrieving record: select
+SELECT * FROM Users
+
+SELECT * FROM Users WHERE email='csev@umich.edu'
+
+#sorting with ORDER BY
+SELECT * FROM Users ORDER BY email
+
+SELECT * FROM Users ORDER BY name DESC
+
+#Multi-Table SQL:
+# primary key - generally an integer auto_increment field
+# logical key - what the outside world uses for lookup
+# foreign key - generally an integer key pointing to a row in another table
+
+CREATE TABLE "Artist" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    "name" TEXT)
+
+CREATE TABLE "Album" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    artist_id INTEGER,
+    "title" TEXT)
+
+CREATE TABLE "Genre" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    "name" TEXT)
+
+CREATE TABLE "Track" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL UNIQUE, 
+    album_id INTEGER, 
+    genre_id INTEGER, 
+    len INTEGER, rating INTEGER, 
+    "title" TEXT, "count" INTEGER)
+
+#insert table row
+INSERT INTO Artist (name) VALUES ('Led Zepplin')
+INSERT INTO Artist (name) VALUES ('AC/DC')
+
+INSERT INTO Genre (name) VALUES ('Rock') ;
+INSERT INTO Genre (name) VALUES ('Metal');
+
+INSERT INTO Album (title, artist_id) VALUES ('Who Made Who', 2);
+INSERT INTO Album (title, artist_id) VALUES ('IV', 1);
+
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('Black Dog', 5, 297, 0, 2, 1) ;
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('Stairway', 5, 482, 0, 2, 1) ;
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('About to Rock', 5, 313, 0, 1, 2) ;
+INSERT INTO Track (title, rating, len, count, album_id, genre_id) 
+    VALUES ('Who Made Who', 5, 207, 0, 1, 2) ;
+
+#join operation
+SELECT Album.title, Artist.name FROM Album JOIN Artist 
+    ON Album.artist_id = Artist.id
+
+SELECT Album.title, Album.artist_id, Artist.id, Artist.name 
+    FROM Album JOIN Artist ON Album.artist_id = Artist.id
+
+SELECT Track.title, Track.genre_id, Genre.id, Genre.name 
+    FROM Track JOIN Genre   
+
+SELECT Track.title, Genre.name FROM Track JOIN Genre 
+    ON Track.genre_id = Genre.id
+
+SELECT Track.title, Artist.name, Album.title, Genre.name 
+FROM Track JOIN Genre JOIN Album JOIN Artist 
+    ON Track.genre_id = Genre.id AND Track.album_id = Album.id 
+    AND Album.artist_id = Artist.id
+ 
+
+#Many-Many Relationship
+CREATE TABLE User (
+    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    name   TEXT UNIQUE,
+    email  TEXT
+) ;
+
+CREATE TABLE Course (
+    id     INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT UNIQUE,
+    title  TEXT UNIQUE
+) ;
+
+CREATE TABLE Member (
+    user_id     INTEGER,
+    course_id   INTEGER,
+	role        INTEGER,
+    PRIMARY KEY (user_id, course_id)
+) ;
+
+INSERT INTO User (name, email) VALUES ('Jane', 'jane@tsugi.org');
+INSERT INTO User (name, email) VALUES ('Ed', 'ed@tsugi.org');
+INSERT INTO User (name, email) VALUES ('Sue', 'sue@tsugi.org');
+
+INSERT INTO Course (title) VALUES ('Python');
+INSERT INTO Course (title) VALUES ('SQL');
+INSERT INTO Course (title) VALUES ('PHP');
+
+INSERT INTO Member (user_id, course_id, role) VALUES (1, 1, 1);
+INSERT INTO Member (user_id, course_id, role) VALUES (2, 1, 0);
+INSERT INTO Member (user_id, course_id, role) VALUES (3, 1, 0);
+
+INSERT INTO Member (user_id, course_id, role) VALUES (1, 2, 0);
+INSERT INTO Member (user_id, course_id, role) VALUES (2, 2, 1);
+
+INSERT INTO Member (user_id, course_id, role) VALUES (2, 3, 1);
+INSERT INTO Member (user_id, course_id, role) VALUES (3, 3, 0);
+
+SELECT User.name, Member.role, Course.title
+  FROM User JOIN Member JOIN Course
+  ON Member.user_id = User.id AND Member.course_id = Course.id
+  ORDER BY Course.title, Member.role DESC, User.name 
+
+#Exercise: Email(https://www.youtube.com/watch?v=uQ3Qv1z_Vao)
+#Exercise: Roster(https://www.youtube.com/watch?v=qEkUEAz8j3o)
+#Exercise: Tracks(https://www.youtube.com/watch?v=I-E7avcPeSE)
+#Exercise: Twfriends(https://www.youtube.com/watch?v=RZRAoBFIH6A)
+#Exercise: Twspider(https://www.youtube.com/watch?v=xBaJddvJL4A)
+
+##How does the PageRank algorithm work?
+##It determines which pages are most highly connected.
+
+#Exercise: Geodata(https://www.youtube.com/watch?v=KfhslNzopxo)
+#Exercise: Gmane Model(https://www.youtube.com/watch?v=wSpl1-7afAk)
+#Exercise: Gmane Spider(https://www.youtube.com/watch?v=H3w4lOFBUOI)
+#Exercise: Gmane Viz(https://www.youtube.com/watch?v=LRqVPMEXByw)
+#Exercise: Page Rank(https://www.youtube.com/watch?v=yFRAZBkBDBs)
+#Exercise: Page Spider(https://www.youtube.com/watch?v=sXedPQ_AnWA)
+#Exercise: Page Viz(https://www.youtube.com/watch?v=Fm0hpkxsZoo)
