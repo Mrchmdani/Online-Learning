@@ -1,6 +1,9 @@
 import abc
 from ctypes import LibraryLoader
+from curses.ascii import ETB
+from msilib import sequence
 from operator import length_hint
+from select import select
 from termios import N_TTY
 
 
@@ -863,3 +866,345 @@ x = 'We just received $10.00' for cookies.
 y = re.findall('\$[0-9.]+', x)
 print(y)
 
+#common tcp ports
+Telnet(23) - Login
+SSH(22) - Secure Login
+HTTP(80)
+HTTPS(443) - Secure
+SMTP(25)(Mail)
+IMAP(143/220/993) - Mail Retrieval
+POP(109/110) - Mail Retrieval
+DNS(53) - Domain Name
+FTP(21) - File Transfer
+
+#socket in python
+import socket
+mysock = socket.socket(socket.AFINET, socket.SOCK_STREAM)
+mysock.connect(('data.pr4e.org', 80))
+
+# An HTTP request in python
+import socket
+mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mysock.connect(('data.pr4e.org', 80))
+cmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\n\n'.encode()mysock.send(cmd)
+
+while True:
+    data = mysock.recv(512)
+    if (len(data) < 1) :
+        break
+    print(data.decode())
+mysock.close()
+
+#simple web browser
+import socket
+
+mysock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mysock.connect(('data.pr4e.org', 80))
+cmd = 'GET http://data.pr4e.org/romeo.txt HTTP/1.0\r\n\r\n'.encode()
+mysock.send(cmd)
+
+while True:
+    data = mysock.recv(512)
+    if len(data) < 1:
+        break
+    print(data.decode(),end='')
+mysock.close()
+
+#using urlib in python
+import urllib.request, urllib.parse, urllib.error
+fhand = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
+for line in fhand:
+    print(line.decode().strip())
+
+#run only contents of "romeo.txt".
+import urllib.request
+fhand = urllib.request.urlopen('http://data.pr4e.org/romeo.txt')
+for line in fhand:
+    print(line.decode().strip())
+
+#Web scraping
+#When a program or script pretend to be a browser and retrieves web pages, looks at those web pages, extracts information, and then looks at more web oages
+#search engine scrape wen pages - It's called "spidering the web" or "web crawling"
+
+#the easy way install beautiful soup
+import urllib.request, urllib.parse, urllib.error
+from bs4 import BeautifulSoup
+
+url = input('Enter - ')     #input this : http://www.dr-chuck.com/page1.html -> http://www.dr-chuck.com/page2.html
+html = urllib.request.urlopen(url).read()  
+soup = BeautifulSoup(html, 'html.parser')
+
+#retrieve all of the anchor tags
+tags = soup('a')
+for tag in tags:
+    print(tag.get('href', None))
+
+#XML basics
+<person>
+ <name>Chuck</name>
+ <phone type="intl">
+ +1 734 303 4456
+ </phone>
+ <email hide = "yes"/>
+</person>
+
+#xml schema - XSD structure
+<person>
+<lastname>Severance</lastname>
+<age>17</age>
+<dateborn>2001-04-17<dateborn>
+</person>
+
+#XSD schema
+<xs:complexType name="person">
+ <xs:sequence>
+  <xs:element name="lastname" type="xs:string"/>
+  <xs:element name="age" type="xs:integer"/>
+  <xs:element name="dateborn" type="xs:date"/>
+ </xs:sequence>
+</xs:complexType>
+
+#XSD constraints
+<xs:element name="person">
+ <xs:complexType>
+  <xs:sequence>
+   <xs:element name="full_name" type="xs:string"
+    minOccurs="1" maxOccurs="1"/>
+   <xs:element name="child_name" type="xs:integer"
+    minOccurs="0" maxOccurs="10"/>
+  </xs:sequence>
+ </xs:complexType>
+</xs:element>
+
+<person>
+ <full_name>Tove Refsnes</full_name>
+ <child_name>Hege</child_name>
+ <child_name>Stale</child_name>
+ <child_name>Jim</child_name>
+ <child_name>Borge</child_name>
+</person>
+
+#CSD data type
+<xs:element name="full_name" type="xs:string"/>
+<xs:element name="start" type="xs:string"/>
+<xs:element name="startdate" type="xs:string"/>
+<xs:element name="prize" type="xs:string"/>
+<xs:element name="weeks" type="xs:string"/>
+
+<customer>John Smith</customer>
+<Start>2002-09-24</child_name>
+<Startdate>2002-05-30T09:30:10</child_name>
+<prize>999.50</child_name>
+<weeks>30</child_name>
+
+import xml.etree.Element Tree as ET
+data = '''<person>
+  <name>Chuck</name>
+  <phone type="intl">
+   +1 734 303 4456
+  </phone>
+  <email hide = "yes"/>
+ </person>'''
+
+tree = ET.fromstring(data)
+print('Name', tree.find('name').text)
+print('Attr', tree.find('email').get('hide'))       #STILL ERROR
+
+#JSON language
+#JSON represents data as nested "list" and "dictionaries"
+import json
+input = '''
+  [
+    { "id" : "001",
+      "x" : "2",
+     "name" : "Chuck"
+    } ,
+    { "id" : "009",
+      "x" : "7",
+      "name" : "Chuck"
+    }
+  ]'''
+
+info = json.loads(input)
+print('User count:', len(info))
+for item in info:
+    print('Name', item['name'])
+    print('Id', item['id'])
+    print('Attribute', item['x'])
+
+
+import json
+data = '''
+  [
+    { "id" : "001",
+      "x" : "2",
+     "name" : "Quincy"
+    } ,
+    { "id" : "009",
+      "x" : "7",
+      "name" : "Mrugesh"
+    }
+  ]
+'''
+info = json.loads(data)
+print(info[1]['name'])
+
+#Application Program Interface(API)
+"status": "OK"
+ "results": [
+     {
+         "geometry":{
+             "location_type": "APPROXIMATE",
+             "location": {
+                 "lat": 42.2808256
+                 "lng": -83.7430378
+             }
+         },
+         "address_components": [
+             {
+                 'long_name': "Ann Arbor",
+                 "types": [
+                     "locality",
+                     "political"
+                 ],
+                 "short_name": Ann Arbor
+             }
+         ],
+         "formatted_address": "Ann Arbor, Mi, USA",
+         "types": [
+             "locality",
+             "political"
+         ]
+     }
+ ]
+
+
+import urllib.request, urllib.parse, urllib.error
+import json
+
+serviceurl = 'http://maps.googleapis.com/maps/api/geocode/json?'
+
+while True :
+    address = input('Enter location: ')
+    if len(address) < 1: break
+
+    url = serviceurl + urllib.parse.urlencode({'address': address})
+
+    print('Retrieving', url)
+    uh = urllib.request.urlopen(url)
+    data = uh.read().decode()
+    print('Retrieved', len(data), 'characters')
+
+    try:
+        js = json.loads(data)
+    except:
+        js = None
+
+if not js or 'status' not in js or js['status'] != 'OK':
+    print('=== Failure To Retrieve ===')
+    print(data)
+    continue
+
+print(json.dumps(js, indent=4))
+
+lat = js["results"][0]["geometry"]['location']["lat"]
+lng = js["results"][0]["geometry"]['location']["lng"]
+print('lat', lat, 'lng', lng)
+location = js['results'][0]['formatted_address']
+print(location)         #STILL ERROR
+
+#EXERCISE: GeoJSON (https://www.youtube.com/watch?v=TJGJN0T8tak)
+#EXERCISE: JSON (https://www.youtube.com/watch?v=vTmw5RtfGMY)
+#EXERCISE: Twitter (https://www.youtube.com/watch?v=2c7YwhvpCro)
+#EXERCISE: XML (https://www.youtube.com/watch?v=AopYOlDa-vY)
+
+#python object
+#input -> process -> output
+inp = input('Europe floor?')
+usf = int(int) + 1
+print('US floor', usf)
+
+class PartyAnimal:
+    x = 0
+
+    def party(self) :
+        self.x = self.x +1
+        print("So far", self.x)
+
+an = PartyAnimal()
+an.party()
+an.party()
+an.party()
+
+
+class PartyAnimal:
+    x = 0
+    def party(self):
+        self.x = self.x + 2
+        print(self.x)
+
+an = PartyAnimal()
+an.party()
+an.party()
+
+#playing with dir() and type()
+x = list()
+type(x)
+dir(x)      #to find "capabilities" of  newly created class
+
+#constructor - to set up some instance variables to have the proper initial values when the object is created
+#destructor - 
+class PartyAnimal:
+    x = 0
+
+    def __init__(self) :            #constructors
+        print('I am constructed')
+
+    def party(self):
+        self.x = self.x + 2
+        print('So far', self.x)
+
+    def __del__(self) :             #destructor
+        print('I am destructed', self.x)
+
+an = PartyAnimal()
+an.party()
+an.party()
+an = 42
+print('am contains', an)
+
+
+class PartyAnimal:
+    x = 0
+    name = ""
+    def __init__(self, z):
+        self.name = z
+        print)self.name, "constructed"
+    
+    def party(self):
+        self.x = self.x + 1
+        print(self.name,"party count", self.x)
+s = PartyAnimal("Sally")
+s.party()
+
+j = PartyAnimal("Jim")
+j.party()
+s.party()
+
+
+class PartyAnimal:
+    x = 0
+    name = ''
+    def __init__(self, nam):
+        self.name = nam
+        print(self.name,'constructed')
+    def party(self):
+        self.x = self.x + 1
+        print(self.name,'party count',self.x)
+
+q = PartyAnimal('Quincy')
+m = PartyAnimal('Miya')
+
+q.party()
+m.party()
+q.party()
