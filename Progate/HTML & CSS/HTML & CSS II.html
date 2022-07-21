@@ -1,0 +1,227 @@
+<!--
+HTML & CSS II
+
+Advanced HTML/CSS
+    In this lesson, we'll be developing a modern web page like the one below.
+    Get ready to gain a lot of new knowledge that is essential in web development!
+-->
+<!--
+The Overall Layout
+    The web page that we'll be making has the HTML layout shown below.
+
+<header> and <footer>
+    Many web pages have headers and footers, so HTML has tags for them.
+    Instead of writing <div class="header"> and <div class="footer"> like we did in the previous lesson, we can use the <header> and <footer> tags, which are more commonly used.
+-->
+
+<header></header>                               <!-- change from <div class="header"></div> -->
+<div class="top-wrapper"></div>
+<footer></footer>                               <!--change from <div class="footer"></div> -->
+
+<!-- Example -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Progate</title>
+    <link rel="stylesheet" href="stylesheet.css">
+  </head>
+  <body>
+    <!-- Write your code here -->
+    <header></header>
+    <div class="top-wrapper"></div>
+    <div class="lesson-wrapper"></div>
+    <div class="message-wrapper"></div>
+    <footer></footer>
+  </body>
+</html>
+
+<!--
+The Top Layout
+    Next we'll be working on the top section.
+    Check out the HTML layout in the image below.
+
+background-image
+    The top section has an image in the background.
+    We can specify this with CSS using the background-image property, like background-image: url(URL);.
+
+background-size
+    The image specified with background-image will repeat itself until it fills the whole space.
+    If you want to fill it with a single image, you can specify background-size: cover;.
+
+Centering the Elements
+   Let's horizontally center the container class.
+    We can do this by specifying the left and right margins to auto.
+    Note that you must also specify the width when doing so.
+    You don't have to understand the meaning of the container class for now, but it will come in handy in the lessons to come. 
+-->
+<div>
+    <h1>LEARN TO CODE</h1>
+</div>
+
+<!-- EXAMPLE -->
+<div class="top-wrapper">
+    <!-- Write your code here -->
+    <div class="container">
+      <h1>LEARN TO CODE.</h1>
+      <h1>LEARN TO BE CREATIVE.</h1>
+      <p>Progate is a web service where you can learn programming online.</p>
+      <p>We offer you a fully equipped coding environment to get you started.</p>
+    </div>
+
+## CHECK CSS code ON HTML & CSS II.css ##
+
+<!--
+Opacity and Letter Spacing
+    Comparing our web page with the final product, we can see the following differences. In the final product,
+    ・The letters are transparent
+    ・There is more space between the letters of "LEARN TO CODE."
+
+opacity
+    To make an element transparent, you can use the opacity property.
+    You can specify a value between 0.0 and 1.0, 0.0 being the most transparent.
+
+letter-spacing
+    The letter-spacing property can be used to specify the space between the letters.
+-->
+
+## CHECK CSS code ON HTML & CSS II.css ##
+
+<!--
+Creating Buttons
+    Now let's create some buttons using <a> tags.
+    Since the <a> tag is an inline element, we can't specify its size and space.
+    Let's find out how to solve this.
+
+Inline-block Elements
+    Inline-block elements have the characteristics of both block-level elements and inline elements.
+    Like inline elements, they will be aligned horizontally, but you can also specify their size and spacing, like block elements.
+
+display
+    <a> tags are inline elements by default, but you can use the display property to change this.
+    The display property can have block, inline-block or inline specified.
+
+Specifying Multiple Classes
+    If you have several elements that have slightly different CSS, you can extract the common CSS and the individual CSS to different classes, and specify them both.
+    You can specify multiple classes by separating them with a space.
+-->
+<div class="btn blue"></div>
+<div class="btn red"></div>
+
+## CHECK CSS code ON HTML & CSS II.css ##
+
+<!--
+Adjusting the Layout
+    Let's adjust the layout of the top section by focusing on the following:
+    ・Changing the button color when the cursor is hovering over it
+    ・Making the corners of the buttons rounded
+    ・Aligning the text to the center
+
+:hover
+    When the cursor is on an element, the element is in the hover state.
+    By adding the :hover selector as shown below, we can specify the CSS for when an element is in the hover state.
+    Make sure you do not put spaces on either side of the :.
+
+border-radius
+    We use the border-radius property to round the corners of elements. The larger the number, the rounder the corners become.
+
+text-align
+    The text-align property lets you align inline and inline-block elements.
+    Values left, center, or right can be specified.
+
+margin: 0 auto and text-align: center
+    We learned that both margin: 0 auto and text-align: center can be used to center elements. 
+    Let's look at the differences between the two. We use margin for block-level elements like containers, and text-align for inline and inline-block elements like buttons and text.
+-->
+## CHECK CSS code ON HTML & CSS II.css ##
+
+<!--
+Using Icons
+    Let's add icons to our buttons like in the image below.
+
+Font Awesome
+    You can easily add icons by using Font Awesome.
+    It has a lot of icons that you can use in your web page.
+    Check out https://fontawesome.com/ for the list of icons that you can use.
+
+Using Font Awesome
+    You can use Font Awesome in the following steps.
+    1. Load the Font Awesome CSS inside the <head> tag
+    2. Add a <span> tag with the classes fa and fa-icon-name
+    (You can find the icon name in the Font Awesome page.)
+-->
+<head>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">"
+</head>
+<span class="fa fa-facebook"></span>
+<span class="fa fa-twitter"></span>
+
+<!-- EXAMPLE -->
+
+<head>
+    <meta charset="utf-8">
+    <title>Progate</title>
+    <link rel="stylesheet" href="stylesheet.css">
+    <!-- Load Font Awesome here -->
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+</head>
+
+<a href="#" class="btn facebook">
+    <!-- Add a <span> tag -->
+    <span class="fa fa-facebook"></span>
+    Sign up with Facebook
+</a>
+<a href="#" class="btn twitter">
+    <!-- Add a <span> tag -->
+    <span class="fa fa-twitter"></span>
+    Sign up with Twitter
+</a>
+
+## CHECK CSS code ON HTML & CSS II.css ##
+
+<!--
+The Header Layout
+    Let's move on to the header section.
+    The HTML layout is shown in the image below.
+    Note that the background color of the header is slightly transparent.
+
+opacity and rgba
+    We've previously used opacity to make an element transparent.
+    But the problem with opacity is that it makes the entire element transparent, including all the child elements.
+    If we only want the background color to be transparent, we can use rgba.
+
+rgb
+    To learn about rgba, we must first understand the rgb.
+    rgb is a way to specify the color with a combination of three values.
+    It works just like the hexadecimal format (e.g. #ffffff) that we've learned before.
+
+rgba
+    rgba is used when you want to specify the transparency of the color.
+    You specify four values for rgba, and the fourth value specifies the transparency from 0.0 to 1.0, 0.0 being the most transparent.
+    The example below shows the difference between rgba and opacity.
+-->
+
+<!-- EXAMPLE -->
+
+<header>
+    <!-- Write your code here -->
+    <div class="container">
+      <div class="header-left">
+        <img class="logo" src="https://prog-8.com/images/html/advanced/main_logo.png">
+      </div>
+    </div>
+  </header>
+
+<!--
+Creating a Login Link
+    Now we'll work on the login link.
+-->
+
+<div class="header-right">
+    <a class="login" href="#">Log in</a>
+</div>
+
+<!--
+    
+-->
