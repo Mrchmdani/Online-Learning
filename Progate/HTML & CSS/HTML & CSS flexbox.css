@@ -1,0 +1,20 @@
+/* HTML & CSS flexbox*/
+
+/*
+Flexbox
+    In this lesson, you'll learn about the CSS layout module, Flexbox.
+    While this module has many properties, you'll focus on the most commonly used ones.
+    Flexbox is really useful, so get going and add this to your skillset!
+
+What is Flexbox?
+    a CSS layout module
+    Up until now, we've used float for aligning items horizontally. However, now we can use Flexbox to achieve the same thing more efficiently.
+
+What Flexbox Can Do
+    With Flexbox, you can easily create different layouts as shown below.
+
+Creating a Horizontal Layout
+
+What is display: flex?
+    Setting display: flex on an element will horizontally stack its children.
+*/

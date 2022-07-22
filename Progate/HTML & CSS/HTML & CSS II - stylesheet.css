@@ -87,7 +87,7 @@ letter-spacing
     margin-bottom: 3px;
   }
 
-  ## CHECK HTML code ON HTML & CSS II.html ##
+## CHECK HTML code ON HTML & CSS II.html ##
 
 /*
 Creating Buttons
@@ -356,3 +356,447 @@ div:hover {
     line-height: 65px;              /* if not using these, text not vertically align in the center */
 }
 
+/* EXAMPLE */
+
+.header-right {
+    float: right;
+    background-color: rgba(255, 255, 255, 0.3);
+    /* Change the transition property */
+    transition: all 0.5s;
+}
+
+/* Add CSS for <a> tags inside header-right */
+.header-right a {
+    line-height: 65px;
+    padding: 0px 25px;
+    color: white;
+    display: block;
+}
+
+/*
+The Lesson List Layout
+    Let's move on to the lesson list section.
+    The HTML layout is shown in the image below.
+    We'll also be learning how to change the thickness of the text.
+
+font-weight
+    The font-weight property lets you change the thickness of the text.
+    You can specify values like normal and bold.
+    Since <h1>~<h6> tags have font-weight: bold; specified by default, you can specify font-weight: normal; to change them back to normal.
+*/
+
+/* Add CSS for lesson-wrapper */
+.lesson-wrapper {
+    height: 500px;
+    padding-bottom: 80px;
+    background-color: #f7f7f7;
+  }
+  
+  
+  /* Add CSS for heading */
+  .heading {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    color: #5f5d60;
+  }
+  
+  
+  /* Add CSS for <h2> tags inside heading */
+  .heading  h2 {
+    font-weight: normal;
+  }
+
+## CHECK HTML code ON HTML & CSS II.html ##
+
+/* 
+Aligning the Lessons
+Now let's work on the lessons section.
+Each lesson has a width of 25%.
+
+Specifying the Size With %
+By using % instead of px, we can calculate the width based on its parent element's width. The same applies for the height property.
+
+The Layout of the Lesson
+The HTML layout of each lesson is shown in the image below.
+*/
+
+/* Add CSS for lesson */
+.lesson {
+    float: left;
+    width: 25%;
+  }
+
+## CHECK HTML code ON HTML & CSS II.html ##
+
+/*
+Overlapping Elements
+    Now let's adjust the layout of each lesson part.
+    Normally in HTML, the elements never overlap.
+    But you can do this by adding some CSS.
+    In this exercise, we'll learn how to place some text on top of an image.
+
+position: absolute;
+    You can use position: absolute; to make the elements overlap.
+    With position: absolute; you can specify the position relative to the top-left corner of the web page, using the top and left properties.
+
+position: relative;
+    You can change the reference point for position: absolute
+    by specifying position: relative; to an ancestor element.
+    This way, the element with position: absolute specified will be positioned relative to the top-left corner of the ancestor element.
+*/
+
+/* Add CSS for lesson-icon */
+.lesson-icon {
+    position: relative;
+  }
+  
+  
+  /* Add CSS for <p> tags inside lesson-icon */
+  .lesson-icon p {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    color: white;
+  }
+  
+  
+  /* Add CSS for txt-contents */
+  .txt-contents {
+    width: 80%;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 15px;
+    color: #b3aeb5;
+}
+
+## CHECK HTML code ON HTML & CSS II.html ##
+
+/*
+The Message Layout
+    Let's move on to the message section.
+    The HTML layout is shown in the image below.
+*/
+
+/* Add CSS for message */
+.message {
+    padding: 15px 40px;
+    background-color: #5dca88;
+  }
+  
+  
+  /* Add CSS for <h3> tags inside heading */
+  .heading h3 {
+    font-weight: normal;
+}
+
+## CHECK HTML code ON HTML & CSS II.html ##
+
+/*
+Creating a 3D Button
+    Let's learn how to make the button look 3D by adding shadows to it.
+    We'll also be learning how to change the mouse pointer type.
+
+box-shadow
+    The box-shadow property is used to add shadows to elements.
+    We can use it by specifying its horizontal length, vertical length, and the color.
+
+cursor
+    The cursor property can be used to change the type of the mouse pointer, like in the image below.
+    Some HTML tags like the <a> tag have the cursor property set to pointer by default.
+*/
+
+.box {
+    box-shadow: 10px 10px #000;         /* horizontal vertical color*/
+}
+
+/* EXAMPLE */
+
+/* Add CSS for message-wrapper */
+.message-wrapper {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 80px;
+    text-align: center;
+  }
+  
+  
+  .message {
+    padding: 15px 40px;
+    background-color: #5dca88;
+    /* Change the cursor property to pointer */
+    cursor: pointer;
+    /* Change the box-shadow property */
+    box-shadow: 0 7px #1a7940;
+  }
+
+/*
+Pressing a Button
+    Let's add some more CSS to the button to make it look like it's been pressed when you click on it.
+    We can do this by doing the following things when the button is clicked.
+    ・Remove the shadow
+    ・Lowering the button by the length of the shadow
+
+:active
+    The :active selector can be used to add CSS for when an element is being clicked, like in the example below.
+
+Canceling CSS
+    You can remove the shadow by specifying box-shadow: none;.
+    Many CSS properties can be canceled by specifying none.
+
+Usage of position: relative;
+    We previously learned how to use position: relative; with position: absolute;, but its actual role is to position the element relative to its normal position.
+    Like position: absolute;, you use the top and left properties.
+
+Pressing a Button
+    We'll add the following CSS to make the button look like it's been pressed.
+    ・Set box-shadow to none
+    ・Use position: relative; with top to lower the element by the length of the shadow
+*/
+
+/* Add CSS for message when it's clicked */
+.message:active {
+    box-shadow: none;
+    position: relative;
+    top: 7px;
+}
+
+/*
+The Footer Layout
+    Now let's work on the footer.
+    The HTML layout is shown in the image below.
+*/
+
+/* Add CSS for <img> tags inside the <footer> */
+footer img {
+    width: 125px;
+}
+  
+  /* Add CSS for <p> tags inside the <footer> */
+  footer p {
+    color: #b3aeb5;
+    font-size: 12px;
+}
+  
+  /* Add CSS for <footer> tags */
+  footer {
+    padding-top: 30px;
+}
+
+## CHECK HTML code ON HTML & CSS II.html ##
+
+/*
+Fixing the Header
+    To finish off, let's learn how to fix an element to a certain position, so that we can keep the header at the top even when you scroll down.
+
+Fixing the Position of an Element
+    We can use position: fixed; to fix an element to a certain position of the screen. We can specify it by combining it with the top and left properties.
+
+The Stack Order of Elements
+    We learned that we use the position property to make the elements overlap, but sometimes they won't be stacked in the desired order.
+    In the image below, the icon images are stacked on top of the header.
+    Let's learn how to fix this.
+
+z-index
+    The z-index property lets you change the stack order of the elements.
+    The element with the greater z-index will be displayed on top.
+    Keep in mind that the z-index property will only take effect when combined with the position property.
+*/
+
+header {
+    height: 65px;
+    width: 100%;
+    background-color: rgba(34, 49, 52, 0.9);
+    /* Change the position property to fixed, and top property to 0 */
+    position: fixed;
+    top: 0;
+    /* Change the z-index property to 10 */
+    z-index: 10;
+}
+
+/* HTML & CSS I END CODE */
+
+body {
+    margin: 0;
+    font-family: "Lucida Grande";
+}
+  
+a {
+    text-decoration: none;
+}
+  
+.container {
+    width: 1170px;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+  
+.top-wrapper {
+    padding: 180px 0 100px 0;
+    background-image: url(https://prog-8.com/images/html/advanced/top_en.png);
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+  
+.top-wrapper h1 {
+    opacity: 0.7;
+    font-size: 45px;
+    letter-spacing: 5px;
+    margin-bottom: 10px;
+}
+  
+.top-wrapper p {
+    opacity: 0.7;
+    margin-bottom: 3px;
+}
+  
+.btn-wrapper {
+    margin: 20px 0;
+}
+  
+.btn-wrapper p {
+    margin: 10px 0;
+}
+  
+.signup {
+    background-color: #239b76;
+}
+  
+.facebook {
+    background-color: #3b5998;
+    margin-right: 10px;
+}
+  
+  .twitter {
+    background-color: #55acee;
+}
+  
+.btn {
+    padding: 12px 24px;
+    color: white;
+    display: inline-block;
+    opacity: 0.8;
+    border-radius: 4px;
+}
+  
+.btn:hover {
+    opacity: 1;
+}
+  
+.fa {
+    margin-right: 5px;
+}
+  
+header {
+    height: 65px;
+    width: 100%;
+    background-color: rgba(34, 49, 52, 0.9);
+    /* Change the position property to fixed, and top property to 0 */
+    position: fixed;
+    top: 0;
+    
+    /* Change the z-index property to 10 */
+    z-index: 10;
+}
+  
+.logo {
+    width: 124px;
+    margin-top: 20px;
+}
+  
+.header-left {
+    float: left;
+}
+  
+.header-right {
+    float: right;
+    background-color: rgba(255, 255, 255, 0.3);
+    transition: all 0.5s;
+}
+  
+.header-right:hover {
+    background-color: rgba(255, 255, 255, 0.5);
+}
+  
+.header-right a {
+    line-height: 65px;
+    padding: 0 25px;
+    color: white;
+    display: block;
+}
+  
+.lesson-wrapper {
+    height: 500px;
+    padding-bottom: 80px;
+    background-color: #f7f7f7;
+    text-align: center;
+}
+  
+.heading {
+    padding-top: 60px;
+    padding-bottom: 30px;
+    color: #5f5d60;
+}
+  
+.heading h2 {
+    font-weight: normal;
+}
+  
+.lesson {
+    float: left;
+    width: 25%;
+}
+  
+.lesson-icon {
+    position: relative;
+}
+  
+.lesson-icon p {
+    position: absolute;
+    top: 90px;
+    width: 100%;
+    color: white;
+}
+  
+.txt-contents {
+    width: 80%;
+    display: inline-block;
+    margin-top: 20px;
+    font-size: 15px;
+    color: #b3aeb5;
+}
+  
+.heading h3 {
+    font-weight: normal;
+}
+  
+.message-wrapper {
+    border-bottom: 1px solid #eee;
+    padding-bottom: 80px;
+    text-align: center;
+}
+  
+.message {
+    padding: 15px 40px;
+    background-color: #5dca88;
+    cursor: pointer;
+    box-shadow: 0 7px #1a7940;
+}
+  
+.message:active {
+    position: relative;
+    top: 7px;
+    box-shadow: none;
+}
+  
+footer img {
+    width: 125px;
+}
+  
+footer p {
+    color: #b3aeb5;
+    font-size: 12px;
+}
+  
+footer {
+    padding-top: 30px;
+}
